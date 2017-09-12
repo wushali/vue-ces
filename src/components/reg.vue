@@ -11,6 +11,7 @@
             </div>
             <p class="rsolid"></p>
         </div>
+        <form action="/reg/submit" method="post">
         <ul>
             <li class="lifirst">
                 <input type="text" value=""/>
@@ -22,9 +23,10 @@
             </li>
         </ul>
         <div class="footbox">
-            <input type="button" value="注 册" class="login-btn"/>
+            <input type="submit" value="注 册" class="login-btn"/>
             <a href="javascript:;" class="tishi">忘记密码？</a>
         </div>
+        </form>
     </div>
 </template>
 <style scoped>

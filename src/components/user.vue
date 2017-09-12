@@ -1,59 +1,33 @@
 <template>
-    <div class="content">
-        <div class="header">
-            <h2><img src="src/assets/img/headimg.png" alt=""/></h2>
-            <div class="user-box">
-
-                <router-link to="/login">登录</router-link>
-                <router-link to="/reg">注册</router-link>
-
-            </div>
-            <ul class="clear">
-                <li>
-                    <span>0</span>
-                    <p>关注</p>
-                </li>
-                <li>
-                    <span>0</span>
-                    <p class="end">粉丝</p>
-                </li>
-            </ul>
-        </div>
-        <div class="docList">
-            <ul>
-                <li class="gk-text">
-                    <i></i>
-                    <p>公开博文</p>
-                    <b></b>
-                    <span>0</span>
-                </li>
-                <li class="mm-text">
-                    <i></i>
-                    <p>秘密博文</p>
-                    <b></b>
-                    <span>0</span>
-                </li>
-                <li class="cg-text">
-                    <i></i>
-                    <p>草稿箱</p>
-                    <b></b>
-                    <span>0</span>
-                </li>
-                <li class="sc-text">
-                    <i></i>
-                    <p>收藏夹</p>
-                    <b></b>
-                    <span>0</span>
-                </li>
-                <li class="my_cz">
-                    <i></i>
-                    <p>收藏夹</p>
-                </li>
-            </ul>
-        </div>
+    <div>
+        <h3>欢迎 {{name}}</h3>
+        <a href="#" @click="quit">注销登录</a>
     </div>
 </template>
-<style>
-    @import "../assets/css/mydoc.css";
 
-</style>
+<script>
+    /*引入公共方法*/
+    import { setCookie,getCookie,delCookie } from '../assets/js/cookie.js'
+    export default{
+        data(){
+            return{
+                name: ''
+            }
+        },
+        mounted(){
+            /*页面挂载获取保存的cookie值，渲染到页面上*/
+            let uname = getCookie('username')
+            this.name = uname
+            /*如果cookie不存在，则跳转到登录页*/
+            if(uname == ""){
+                this.$router.push('/')
+            }
+        },
+        methods:{
+            quit(){
+                /*删除cookie*/
+                delCookie('username')
+            }
+        }
+    }
+</script>

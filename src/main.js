@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 
+
 //引入公共资源
 import './assets/css/base.css';
 import './assets/js/font.js';
