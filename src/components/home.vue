@@ -11,16 +11,12 @@
                 <router-link tag="li" :to="'/detail/'+item.id">
                     <h2>{{item.id}}.{{item.title}}</h2>
                     <p v-html="item.detail"></p>
+                    <img :src=item.src alt="">
                 </router-link>
             </li>
 
 
-            <!--<li>-->
-                <!--<a href="javascript:;">-->
-                    <!--<h2>4.xx</h2>-->
-                    <!--<p>oooo</p>-->
-                <!--</a>-->
-            <!--</li>-->
+
 
 
 
@@ -31,46 +27,41 @@
 </div>
 </template>
 <script>
-    //import $ from 'jquery';
 
     import  silder from './silder.vue';
     export default{
             data(){
                 return{
-                   arr:[ ]
+                   arr:[]
                 }
             },
         components:{
             silder
         },
-//        created(){
-//            this.$http({
-//                url:'/data/index.data'
-//            }).then((res)=>{
-//            this.arr=res.data;
-//            }).catch((res)=>{})
-//        }
-//    }
     created(){
         this.$store.dispatch('showLoading'); //显示loading
         setTimeout(()=>{//模拟
             this.$http({
-//        url:'http://localhost:3000/index',
-//        url:'http://localhost:80/index.php',
-                url:'/data/index.data',
+                url:'data/index.data',
             }).then((res)=>{
-//        console.log(res.data);
+      // console.log(res);
                 this.$store.dispatch('hideLoading');//隐藏loading
                 this.arr=res.data;
-
+              //  console.log(arr);
             }).catch((res)=>{
-                console.log(res);
+               // console.log(res);
             })
         },2000);
 
     }
     }
 </script>
-<style>
+<style scoped>
     @import '../assets/css/index.css';
+    .newsList{width: 100%;}
+    li{margin-bottom: 2px;overflow-y:hidden}
+    h2{width: 100%}
+    p{float: left;width: 70%}
+    img{float:right;width: 30%;height: 100px;}
+
 </style>
