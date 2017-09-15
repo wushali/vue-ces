@@ -3,6 +3,7 @@
 
 
     <!--banner-->
+
     <silder></silder>
     <!--home列表-->
     <div class="newsList">
@@ -29,7 +30,10 @@
 <script>
 
     import  silder from './silder.vue';
+    import { setCookie,getCookie,delCookie } from '../assets/js/cookie.js'
     export default{
+
+
             data(){
                 return{
                    arr:[]
@@ -54,6 +58,7 @@
         },2000);
 
     }
+
     }
 </script>
 <style scoped>
@@ -61,7 +66,8 @@
     .newsList{width: 100%;}
     li{margin-bottom: 2px;overflow-y:hidden}
     h2{width: 100%}
-    p{float: left;width: 70%}
+    p{float: left;width: 70%;height:100px; }
     img{float:right;width: 30%;height: 100px;}
+
 
 </style>

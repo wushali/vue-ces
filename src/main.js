@@ -9,6 +9,10 @@ import './assets/js/font.js';
 //引入路由
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
+import axios from 'axios'
+Vue.prototype.$http=axios
+//允许跨越凭证
+axios.defaults.withCredentials=true
 import routes from './router.config'
 const router=new VueRouter({
   routes:routes,
@@ -17,7 +21,8 @@ const router=new VueRouter({
 //引入状态管理
 import store from './store/index.js';
 
-//引入axios
+
+/*//引入axios
 import axios from 'axios';
 
 //拦截器，统一配置相关插件，在处理流程中，做一个拦截操作
@@ -28,7 +33,7 @@ axios.interceptors.request.use(function (config) {
 }, function (error) {
   // Do something with request error
   return Promise.reject(error);
-});
+});*/
 
 // Add a response interceptor
 axios.interceptors.response.use(function (response) {
@@ -40,7 +45,7 @@ axios.interceptors.response.use(function (response) {
   return Promise.reject(error);
 });
 
-Vue.prototype.$http=axios;
+//Vue.prototype.$http=axios;
 
 //引入全局过滤器
 import filters from './filters/'
@@ -53,6 +58,12 @@ import loading from './components/loading/'
 Vue.use(loading);
 
 import 'animate.css';
+
+//引入全局swipe
+import { Swipe, SwipeItem } from 'vue-swipe';
+import'vue-swipe/dist/vue-swipe.css';
+Vue.component('swipe', Swipe);
+Vue.component('swipe-item', SwipeItem);
 
 new Vue({
   el: '#app',

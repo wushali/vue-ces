@@ -1,7 +1,7 @@
 <template>
     <div class="content">
-        <p class="fhbtn"><a href="javascript:window.history.go(-1);"></a></p>
-        <h1></h1>
+        <p class="fhbtn"><router-link to="/home"></router-link></p>
+        <!--<h1></h1>-->
         <div class="login-box">
             <p class="lsolid"></p>
             <div class="login">
@@ -13,26 +13,56 @@
         </div>
         <ul>
             <li class="lifirst">
-                <input type="text" value=""/>
+                <input type="text" value="" v-model="username"/>
                 <span>帐号</span>
             </li>
             <li>
-                <input type="text" value=""/>
+                <input type="text" value="" v-model="password"/>
                 <span>密码</span>
             </li>
         </ul>
         <div class="footbox">
-            <input type="button" value="登 录" class="login-btn"/>
+            <input type="button" value="登 录" class="login-btn" @click="action"/>
             <a href="javascript:;" class="tishi">忘记密码？</a>
         </div>
     </div>
 </template>
-<style scoped>
+<script type="text/ecmascript-6">
+    export default{
+        data(){
+            return {
+                username: "",
+                password: ""
+            }
+        },
+        methods: {
+            action(){
+                let req = {username: this.username, password: this.password}
+                this.$http({
+                    method: "post",
+                    url: "http://localhost:3000/login",
+                    params: {
+                        username: this.username,
+                        password: this.password
+                    }
+                }).then((res)=> {
+                    if(res.data.flag){
+                        this.$router.push("/home");
+                    }else{
+                        alert(res.data.msg)
+                    }
+                })
+
+            }
+        }
+    }
+</script>
+<style>
     body{ background:#f2f4f5;}
     .content{max-width:6.4rem; margin:0 auto;}
     .content .fhbtn{ padding-top:0.27rem;}
     .content .fhbtn a{ display:block;width:0.23rem;height:0.25rem; background:url(/src/assets/img/history1.png) no-repeat 0 0; background-size:100%; margin-left:0.3rem;}
-    .content h1{width:2.18rem;height:1.35rem; background:url(/src/assets/img/say.png) no-repeat 0 0; background-size:100%; margin:0 auto; margin-top:1.22rem;}
+    .content h1{width:2.18rem;height:1.35rem; background:url(/src/assets/images/bw.png) no-repeat 0 0; background-size:100%; margin:0 auto; margin-top:1.22rem;}
     .content .login{width:2.0rem;height:0.38rem; margin:0 auto; margin-top:0.85rem;}
     .login a{width:0.97rem;height:0.38rem; font-size:0.35rem; line-height:0.38rem; float:left; color:#4c4f50; text-align:center;}
     .login span{ float:left;height:0.38rem; border-left:1px solid #4c4f50;}

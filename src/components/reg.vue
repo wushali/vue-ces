@@ -1,7 +1,7 @@
 <template>
     <div class="content">
         <p class="fhbtn"><a href="javascript:window.history.go(-1);"></a></p>
-        <h1></h1>
+        <!--<h1></h1>-->
         <div class="login-box">
             <p class="lsolid"></p>
             <div class="login">
@@ -11,23 +11,54 @@
             </div>
             <p class="rsolid"></p>
         </div>
-        <form action="/reg/submit" method="post">
         <ul>
             <li class="lifirst">
-                <input type="text" value=""/>
+                <input type="text" value="" v-model="admin"/>
                 <span>帐号</span>
             </li>
             <li>
-                <input type="text" value=""/>
+                <input type="text" value="" v-model="password"/>
                 <span>密码</span>
             </li>
         </ul>
         <div class="footbox">
-            <input type="submit" value="注 册" class="login-btn"/>
+            <input type="button" value="注 册" class="login-btn" @click="reg"/>
             <a href="javascript:;" class="tishi">忘记密码？</a>
         </div>
-        </form>
+
     </div>
+    </template>
+    <script type="text/ecmascript-6">
+        export default {
+            data(){
+                return {
+                    admin:"",
+                    password:""
+                }
+            },
+            methods:{
+                reg(){
+                    let req={username:this.admin,password:this.password}
+                    this.$http({
+                        method:"post",
+                        url:"http://localhost:3000/reg",
+                        params:{
+                            username:this.admin,
+                            password:this.password
+                        }
+                    }).then((res)=>{
+                        if(res.data.flag){
+                            alert("成功")
+                            this.$router.push("/login")
+                        }else{
+                            alert(res.data.msg)
+                        }
+                    })
+                }
+            }
+
+        }
+    </script>
 </template>
 <style scoped>
     body{ background:#f2f4f5;}
