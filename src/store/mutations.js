@@ -1,5 +1,5 @@
 import * as types from './types';
-const actions={
+const mutations={
   [types.SHOW_LOADING]:(state)=>{
     state.bLoading=true;
   },
@@ -17,6 +17,9 @@ const actions={
   },
   [types.HIDE_FOOT]:(state)=>{
     state.bFoot=false;
+  },
+  [types.SESSION]:(state,data)=>{
+    state.session=data
   }
 };
-export default actions;
+export default mutations;

@@ -28,6 +28,7 @@
     </div>
 </template>
 <script type="text/ecmascript-6">
+    import {mapMutations} from 'vuex'
     export default{
         data(){
             return {
@@ -36,6 +37,9 @@
             }
         },
         methods: {
+            ...mapMutations({
+                setSession:'SESSION'
+            }),
             action(){
                 let req = {username: this.username, password: this.password}
                 this.$http({
@@ -47,6 +51,7 @@
                     }
                 }).then((res)=> {
                     if(res.data.flag){
+                        this.setSession(res.data.username);
                         this.$router.push("/home");
                     }else{
                         alert(res.data.msg)

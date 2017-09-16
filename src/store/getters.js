@@ -8,5 +8,8 @@ let getters={
   getLoading:(state)=>{
     return state.bLoading;
   },
+  getSession:(state)=>{
+    return state.session
+}
 };
 export default getters;
